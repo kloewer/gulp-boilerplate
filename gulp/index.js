@@ -42,7 +42,7 @@ appFiles = {
     paths.images.src + '/**/*.{png,jpg,jpeg,gif,svg}'
   ],
   fonts: [
-    paths.fonts.src + '/**/*.{woff,eot,ttf,oft}'
+    paths.fonts.src + '/**/*.{woff2,woff,eot,ttf,otf,svg}'
   ]
 };
 
