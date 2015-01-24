@@ -11,33 +11,20 @@ merge = require('merge-stream');
 gulp.task('styles', function() {
 
   // handle vendor styles
-  var vendorStyles = null;
-
-  try {
-    vendorStyles = gulp.src(_bower()).pipe($.filter('**/*.css'));
-  }
-  catch (error) {
-
-  }
+  var vendorStyles = gulp.src(_bower()).pipe($.filter('**/*.css'));
 
   // handle app styles
   var appStyles = gulp
     .src(appFiles.styles)
-    .pipe($.plumber({ errorHandler: function (error) {}}))
-    .pipe($.rubySass({
-      style: sassStyle,
-      // sourcemap: sourceMap,
-      // sourcemapPath: basePaths.root + '/src/styles'
-    }))
+    .pipe($.plumber({ errorHandler: function (error) { console.log(error); }}))
+    .pipe($.rubySass({ style: sassStyle }))
     .pipe($.autoprefixer('last 2 version', 'ie 9', 'ios 6', 'android 4')); // see: https://github.com/ai/autoprefixer
 
   // final polishing to all styles
-  return (vendorStyles !== null ? merge(vendorStyles, appStyles) : appStyles)
-    // .pipe($.sourcemaps.init())
+  var styles = merge(vendorStyles, appStyles)
     .pipe($.concat('styles.css'))
     .pipe(isProduction ? $.combineMediaQueries({ log: true }) : _.noop())
-    .pipe(isProduction ? $.minifyCss({ keepSpecialComments: 1 }) : _.noop())
-    // .pipe(isProduction ? _.noop() : $.sourcemaps.write('.', { includeContent: false, sourceRoot: basePaths.root }))
+    .pipe(isProduction ? $.minifyCss({ keepSpecialComments: 1, noAdvanced: 1 }) : _.noop())
     .pipe(gulp.dest(paths.styles.dest))
     .pipe($.size({ title: 'styles:app' }));
 });

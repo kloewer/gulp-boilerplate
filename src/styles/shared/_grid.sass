@@ -1,0 +1,59 @@
+// -----------------------------------------------------------------------------
+// grid settings.
+// -----------------------------------------------------------------------------
+$grid-gutter: 20px
+$grid-column-max: 16
+$grid-column-width: 60px
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// basic grid sizes.
+// -----------------------------------------------------------------------------
+.#{$ns}-grid
+  margin: auto
+  padding-left: 10px
+  padding-right: 10px
+  width: $viewport-small
+
+  // @media (min-width: $viewport-medium)
+  //   width: $viewport-medium
+
+  // @media (min-width: $viewport-large)
+  padding-left: 42px
+  padding-right: 42px
+  width: $viewport-large
+
+  // @media (min-width: $viewport-xlarge)
+  //   width: $viewport-xlarge
+  //   padding-left: 10px
+  //   padding-right: 10px
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// grid columns behaviour.
+// -----------------------------------------------------------------------------
+.#{$ns}-grid .col
+  background-color: rgba(255, 0, 0, 0.1)
+  float: left
+  position: relative
+  width: $grid-column-width
+
+  // add gutter
+  ~ .col
+    margin-left: $grid-gutter
+
+  // add ability to span columns
+  @for $i from 2 through $grid-column-max
+    &.span-#{$i}
+      width: #{$grid-column-width * $i + ($grid-gutter * ($i - 1))}
+
+  // add ability to shift columns
+  @for $i from 1 through ($grid-column-max - 1)
+    &.shift-#{$i}
+      margin-left: #{$grid-column-width * $i + ($grid-gutter * $i)}
+
+    // first shifted column has one column-space less
+    ~ .col.shift-#{$i}
+      margin-left: #{$grid-column-width * $i + ($grid-gutter * ($i + 1))}
+// -----------------------------------------------------------------------------
+

@@ -12,7 +12,7 @@ _bower  = require('main-bower-files');
 // -----------------------------------------------------------------------------
 basePaths = {
   src:  './src',
-  dest: './build/assets',
+  dest: './public/assets',
   root: '/'
 };
 
@@ -24,6 +24,10 @@ paths = {
   styles: {
     src:    basePaths.src + '/styles',
     dest:   basePaths.dest + '/css'
+  },
+  scripts: {
+    src:    basePaths.src + '/scripts',
+    dest:   basePaths.dest + '/js'
   },
   fonts: {
     src:    basePaths.src + '/fonts',
@@ -38,11 +42,14 @@ appFiles = {
   styles: [
     paths.styles.src + '/**/*.sass'
   ],
+  scripts: [
+    paths.scripts.src + '/**/*.js'
+  ],
   images: [
     paths.images.src + '/**/*.{png,jpg,jpeg,gif,svg}'
   ],
   fonts: [
-    paths.fonts.src + '/**/*.{woff2,woff,eot,ttf,otf,svg}'
+    paths.fonts.src + '/**/*.{woff2,woff,svg,eot,ttf,otf}'
   ]
 };
 

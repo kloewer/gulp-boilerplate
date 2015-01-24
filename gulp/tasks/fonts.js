@@ -4,18 +4,9 @@
 gulp.task('fonts', function() {
 
   // vendor & app fonts
-  var vendorFonts = null;
-
-  try {
-    vendorFonts = _bower();
-  }
-  catch (error) {
-
-  }
-
-  return gulp
-    .src(vendorFonts !== null ? vendorFonts.concat(appFiles.fonts) : appFiles.fonts)
-    .pipe($.filter('**/*.{woff2,woff,eot,ttf,otf,svg}'))
+  gulp
+    .src(_bower().concat(appFiles.fonts))
+    .pipe($.filter('**/*.{woff2,woff,svg,eot,ttf,otf}'))
     .pipe(gulp.dest(paths.fonts.dest))
     .pipe($.size({ title: 'fonts:vendor and app' }));
 });

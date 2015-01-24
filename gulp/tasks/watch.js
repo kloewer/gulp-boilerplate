@@ -1,11 +1,17 @@
 // -----------------------------------------------------------------------------
 // configure watching task.
 // -----------------------------------------------------------------------------
-gulp.task('watch', [ 'images', 'styles', 'fonts' ], function(){
+gulp.task('watch', [ 'images', 'styles', 'scripts', 'fonts' ], function(){
 
     // watch styles
     $.watch(appFiles.styles, function(files, cb) {
         gulp.start('styles', cb);
+    })
+      .on('change', function(event) { changeEvent(event); });
+
+    // watch for JavaScript changes
+    $.watch(appFiles.scripts, function(files, cb) {
+        gulp.start('scripts', cb);
     })
       .on('change', function(event) { changeEvent(event); });
 

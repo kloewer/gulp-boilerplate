@@ -1,8 +1,6 @@
 // -----------------------------------------------------------------------------
-// we can create a default task, ran by using $ gulp, to run all three tasks we
-// have created:
+// custom mixins/functions will find it's place in here.
 // -----------------------------------------------------------------------------
-gulp.task('default', [ 'clean' ], function() {
-  gulp.start('styles', 'scripts', 'images', 'fonts');
-});
+@function strip-unit ($number)
+  @return $number / ($number * 0 + 1)
 // -----------------------------------------------------------------------------

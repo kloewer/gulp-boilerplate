@@ -5,7 +5,7 @@
 // -----------------------------------------------------------------------------
 gulp.task('clean', function() {
   return gulp
-    .src([ paths.styles.dest, paths.images.dest, paths.fonts.dest ], { read: false })
+    .src([ paths.styles.dest, paths.scripts.dest, paths.images.dest, paths.fonts.dest ], { read: false })
     .pipe($.rimraf());
 });
 // -----------------------------------------------------------------------------
