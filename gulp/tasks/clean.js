@@ -3,9 +3,9 @@
 // rebuild the files—just in case any have been removed from the source and are
 // left hanging out in the destination folder:
 // -----------------------------------------------------------------------------
+var del = require('del');
+
 gulp.task('clean', function() {
-  return gulp
-    .src([ paths.styles.dest, paths.scripts.dest, paths.images.dest, paths.fonts.dest ], { read: false })
-    .pipe($.rimraf());
+  del([ paths.styles.dest, paths.scripts.dest, paths.images.dest, paths.fonts.dest ]);
 });
 // -----------------------------------------------------------------------------

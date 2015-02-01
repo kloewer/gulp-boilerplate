@@ -7,7 +7,7 @@ gulp.task('scripts', function() {
   var vendorScripts = gulp
     .src(_bower())
     .pipe($.filter('**/*.js'))
-    .pipe(isProduction ? $.concat('plugins.js') : $.concatSourcemap('plugins.js'))
+    .pipe(isProduction ? $.concat('plugins.js') : _.noop())
     .pipe(isProduction ? $.uglify() : _.noop())
     .pipe(gulp.dest(paths.scripts.dest))
     .pipe($.size({ title: 'scripts:vendor' }));
@@ -15,7 +15,7 @@ gulp.task('scripts', function() {
   // application scripts
   var appScripts = gulp
     .src(appFiles.scripts)
-    .pipe(isProduction ? $.concat('app.js') : $.concatSourcemap('app.js'))
+    .pipe(isProduction ? $.concat('app.js') : _.noop())
     .pipe(isProduction ? $.uglify() : _.noop())
     .pipe(gulp.dest(paths.scripts.dest))
     .pipe($.size({ title: 'scripts:app' }));
