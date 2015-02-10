@@ -12,7 +12,7 @@ _bower  = require('main-bower-files');
 // -----------------------------------------------------------------------------
 basePaths = {
   src:  './src',
-  dest: './public/assets',
+  dest: './build/assets',
   root: '/'
 };
 
