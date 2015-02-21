@@ -15,7 +15,7 @@
   ],
   "dependencies": {
     "normalize-css": "latest",
-    "jquery": "~2.1.3"
+    "jquery": "latest"
   },
   "overrides": {}
 }
