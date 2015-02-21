@@ -10,7 +10,9 @@ gulp.task('browser-sync', function() {
         proxy: build.browserSync && build.browserSync.proxy ? build.browserSync.proxy : 'localhost'
     });
 
-    $.watch(build.browserSync.watchForChange, function() {
-        browserSync.reload();
-    });
+    if ('watchForChange' in build.browserSync) {
+        $.watch(build.browserSync.watchForChange, function() {
+            browserSync.reload();
+        });
+    }
 });
