@@ -1,8 +1,6 @@
-// -----------------------------------------------------------------------------
-// we can create a default task, ran by using $ gulp, to run all three tasks we
-// have created:
-// -----------------------------------------------------------------------------
+/**
+ * This is the default task that is being run when you just call `gulp`.
+ */
 gulp.task('default', [ 'clean' ], function() {
-  gulp.start('styles', 'scripts', 'images', 'fonts');
+    return gulp.start('styles', 'scripts', 'images', 'fonts');
 });
-// -----------------------------------------------------------------------------

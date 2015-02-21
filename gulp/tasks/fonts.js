@@ -1,13 +1,9 @@
-// -----------------------------------------------------------------------------
-// handle app and vendor fonts.
-// -----------------------------------------------------------------------------
+/**
+ * This task handles all font files.
+ */
 gulp.task('fonts', function() {
-
-  // vendor & app fonts
-  gulp
-    .src(_bower().concat(appFiles.fonts))
-    .pipe($.filter('**/*.{woff2,woff,svg,eot,ttf,otf}'))
-    .pipe(gulp.dest(paths.fonts.dest))
-    .pipe($.size({ title: 'fonts:vendor and app' }));
+    return gulp.src(bower(build.files.fonts).concat(build.files.fonts.map(function (file) { return paths.fonts.src + '/' + file; })))
+        .pipe(gulp.dest(paths.fonts.dest))
+        .pipe($.size({ title: 'fonts done.' }))
+        .pipe(browserSync.reload({ stream: true }));
 });
-// -----------------------------------------------------------------------------

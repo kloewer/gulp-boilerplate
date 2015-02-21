@@ -1,85 +1,69 @@
-// -----------------------------------------------------------------------------
-// include gulp and additional plugins.
-// -----------------------------------------------------------------------------
-gulp    = require('gulp'),
-$       = require('gulp-load-plugins')({ camelize: true }),
-_       = $.loadUtils([ 'log', 'colors', 'env', 'noop' ]);
-_bower  = require('main-bower-files');
-// -----------------------------------------------------------------------------
+/**
+ * Include gulp and additional plugins.
+ */
+gulp = require('gulp'),
+$ = require('gulp-load-plugins')({ camelize: true }),
+_ = $.loadUtils([ 'log', 'colors', 'env', 'noop' ]);
 
-// -----------------------------------------------------------------------------
-// project configuration.
-// -----------------------------------------------------------------------------
-basePaths = {
-  src:  './src',
-  dest: './build/assets',
-  root: '/'
-};
+browserSync = require('browser-sync');
+bower  = require('main-bower-files');
+merge = require('merge-stream');
+fs = require('fs');
 
+
+/**
+ * Load build configuration.
+ */
+build = require('../build.json');
 paths = {
-  images: {
-    src:    basePaths.src + '/images',
-    dest:   basePaths.dest + '/images'
-  },
-  styles: {
-    src:    basePaths.src + '/styles',
-    dest:   basePaths.dest + '/css'
-  },
-  scripts: {
-    src:    basePaths.src + '/scripts',
-    dest:   basePaths.dest + '/js'
-  },
-  fonts: {
-    src:    basePaths.src + '/fonts',
-    dest:   basePaths.dest + '/fonts'
-  }
-// sprites: {
-//   src: basePaths.src + 'sprite/*'
-// }
+    images: {
+        src: build.src + '/' + build.directories.images,
+        dest: build.dest + '/' + build.directories.images
+    },
+    styles: {
+        src: build.src + '/' + build.directories.styles,
+        dest: build.dest + '/' + build.directories.styles
+    },
+    scripts: {
+        src: build.src + '/' + build.directories.scripts,
+        dest: build.dest + '/' + build.directories.scripts
+    },
+    fonts: {
+        src: build.src + '/' + build.directories.fonts,
+        dest: build.dest + '/' + build.directories.fonts
+    }
 };
 
-appFiles = {
-  styles: [
-    paths.styles.src + '/**/*.sass'
-  ],
-  scripts: [
-    paths.scripts.src + '/**/*.js'
-  ],
-  images: [
-    paths.images.src + '/**/*.{png,jpg,jpeg,gif,svg}'
-  ],
-  fonts: [
-    paths.fonts.src + '/**/*.{woff2,woff,svg,eot,ttf,otf}'
-  ]
-};
 
-// default building process is designed for production
+/**
+ * By default build process is designed for production use.
+ */
 isProduction = true;
 sassStyle = 'compressed';
 sourceMap = false;
 
-// run `gulp --dev`
+
+/**
+ * There are some flags which give the ability to dynamically change the way
+ * the build process is working.
+ */
 if (_.env.dev === true) {
-  sassStyle = 'expanded';
-  sourceMap = true;
-  isProduction = false;
+    sassStyle = 'nested';
+    sourceMap = true;
+    isProduction = false;
 }
 
-// whenever a file changes, this outputs what file it was and what happened to it
-changeEvent = function(event) {
-  _.log('File', _.colors.cyan(event.path.replace(new RegExp('/.*(?=/' + basePaths.src + ')/'), '')), 'was', _.colors.magenta(event.type));
-};
 
-// log environment
+/**
+ * Tell which environment we're going to run for.
+ */
 console.log('\nBuilding for', _.colors.magenta(isProduction ? 'production' : 'development'), '...\n');
-// -----------------------------------------------------------------------------
 
-// -----------------------------------------------------------------------------
-// task handler.
-// -----------------------------------------------------------------------------
-fs = require('fs');
+
+/**
+ * Which task should be run?
+ */
 tasks = fs.readdirSync('./gulp/tasks/');
 tasks.forEach(function(task) {
-  require('./tasks/' + task);
+    require('./tasks/' + task);
 });
-// -----------------------------------------------------------------------------

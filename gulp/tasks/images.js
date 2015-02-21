@@ -1,13 +1,11 @@
-// -----------------------------------------------------------------------------
-// this will take any source images and compresses it.
-// -----------------------------------------------------------------------------
+/**
+ * This task handles all font files.
+ */
 gulp.task('images', function() {
-
-  // add the newer pipe to pass through newer images only
-  return gulp.src(appFiles.images)
-    .pipe($.newer(paths.images.dest))
-    .pipe($.imagemin({ optimizationLevel: 7, progressive: true, interlaced: true }))
-    .pipe(gulp.dest(paths.images.dest))
-    .pipe($.size({ title: 'images' }));
+    return gulp.src(bower(build.files.images).concat(build.files.images.map(function (file) { return paths.images.src + '/' + file; })))
+        .pipe($.newer(paths.images.dest))
+        .pipe($.imagemin({ optimizationLevel: 7, progressive: true, interlaced: true }))
+        .pipe(gulp.dest(paths.images.dest))
+        .pipe($.size({ title: 'images done.' }))
+        .pipe(browserSync.reload({ stream: true }));
 });
-// -----------------------------------------------------------------------------

@@ -1,23 +1,27 @@
-// -----------------------------------------------------------------------------
-// concatenate, strip debugging and minify javascript files.
-// -----------------------------------------------------------------------------
+/**
+ * This task handles all JavaScript files. Loads all vendor scripts (e.g from a
+ * package manager like Bower) and then all applications scripts. Once this is
+ * done additional tasks will happen like concatenation, uglification and
+ * several other optimizations for production use.
+ *
+ * If the flag '--dev' was given, some of those tasks are skipped.
+ */
+var amdo = require('amd-optimize');
+
 gulp.task('scripts', function() {
 
-  // vendor scripts
-  var vendorScripts = gulp
-    .src(_bower())
-    .pipe($.filter('**/*.js'))
-    .pipe(isProduction ? $.concat('plugins.js') : _.noop())
-    .pipe(isProduction ? $.uglify() : _.noop())
-    .pipe(gulp.dest(paths.scripts.dest))
-    .pipe($.size({ title: 'scripts:vendor' }));
+    var vendor = gulp.src(bower('**/*.js'))
+        .pipe($.concat('plugins.js'))
+        .pipe(isProduction ? $.uglify() : _.noop())
+        .pipe(gulp.dest(paths.scripts.dest))
+        .pipe($.size({ title: 'vendor scripts done.' }));
 
-  // application scripts
-  var appScripts = gulp
-    .src(appFiles.scripts)
-    .pipe(isProduction ? $.concat('app.js') : _.noop())
-    .pipe(isProduction ? $.uglify() : _.noop())
-    .pipe(gulp.dest(paths.scripts.dest))
-    .pipe($.size({ title: 'scripts:app' }));
+    var app = gulp.src(build.files.scripts.map(function (file) { return paths.scripts.src + '/' + file; }))
+        // .pipe($.concat('app.js'))
+        // .pipe(isProduction ? $.uglify() : _.noop())
+        .pipe(gulp.dest(paths.scripts.dest))
+        .pipe($.size({ title: 'app scripts done.' }))
+        .pipe(browserSync.reload({ stream: true }));
+
+    return merge(vendor, app);
 });
-// -----------------------------------------------------------------------------
