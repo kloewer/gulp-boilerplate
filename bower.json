@@ -15,7 +15,8 @@
   ],
   "dependencies": {
     "normalize-css": "latest",
-    "jquery": "latest"
+    "jquery": "latest",
+    "picturefill": "~2.2.0"
   },
   "overrides": {}
 }
