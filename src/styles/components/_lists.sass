@@ -1,24 +1,6 @@
 // -----------------------------------------------------------------------------
 // Default list styling.
 // -----------------------------------------------------------------------------
-ul, ol, dl
-  margin-top: 20px
-
-ol
-  counter-reset: section
-  list-style-type: none
-  padding: 0
-
-  ol
-    margin-bottom: 0.75em
-    margin-top: 0.5em
-    margin-left: 1.5em
-
-  li::before
-    content: counters(section, ".") ". "
-    counter-increment: section
-    padding-right: 0.75em
-
 .unstyled
   margin: 0
   padding: 0
