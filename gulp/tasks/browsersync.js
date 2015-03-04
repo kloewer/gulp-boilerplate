@@ -7,7 +7,8 @@
  */
 gulp.task('browser-sync', function() {
     browserSync({
-        proxy: build.browserSync && build.browserSync.proxy ? build.browserSync.proxy : 'localhost'
+        proxy: build.browserSync && build.browserSync.proxy ? build.browserSync.proxy : 'localhost',
+        notify: build.browserSync && build.browserSync.notify ? build.browserSync.notify : true,
     });
 
     if ('watchForChange' in build.browserSync) {
