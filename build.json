@@ -17,6 +17,6 @@
     "browserSync": {
         "proxy": "localhost",
         "watchForChange": "./build/**/*.{html,php}",
-        notify: false
+        "notify": false
     }
 }
