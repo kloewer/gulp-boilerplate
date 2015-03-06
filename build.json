@@ -18,5 +18,8 @@
         "proxy": "localhost",
         "watchForChange": "./build/**/*.{html,php}",
         "notify": false
+    },
+    "autoprefixer": {
+        "browsers": "last 1 versions, last 2 safari versions, last 2 ie versions, android >= 4.4, last 2 iOS versions"
     }
 }

@@ -10,7 +10,7 @@ gulp.task('styles', function() {
             outputStyle: sassStyle
         }))
         // @see https://github.com/ai/autoprefixer
-        .pipe($.autoprefixer('last 2 version', 'ie 9', 'ios 6', 'android 4'));
+        .pipe($.autoprefixer(build.autoprefixer && build.autoprefixer.browsers ? build.autoprefixer.browsers : 'last 2 versions'));
 
     return merge(gulp.src(bower('**/*.css')), app)
         .pipe($.concat('styles.css'))
