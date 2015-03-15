@@ -17,3 +17,7 @@ Check `build.json` for customizing.
 ---
 
 **Bower** components enabled by default: normalize.css, picturefill.
+
+---
+
+v1.0.1
