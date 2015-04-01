@@ -10,7 +10,7 @@ var amdo = require('amd-optimize');
 
 gulp.task('scripts', function() {
 
-    var vendor = gulp.src(bower('**/*.js'))
+    var vendor = gulp.src(bower(build.files.scripts))
         .pipe($.concat('plugins.js'))
         .pipe(isProduction ? $.uglify() : _.noop())
         .pipe(gulp.dest(paths.scripts.dest))

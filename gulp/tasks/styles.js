@@ -12,7 +12,7 @@ gulp.task('styles', function() {
         // @see https://github.com/ai/autoprefixer
         .pipe($.autoprefixer(build.autoprefixer && build.autoprefixer.browsers ? build.autoprefixer.browsers : 'last 2 versions'));
 
-    return merge(gulp.src(bower('**/*.css')), app)
+    return merge(gulp.src(bower(build.files.styles)), app)
         .pipe($.concat('styles.css'))
         .pipe(isProduction ? $.combineMediaQueries({ log: true }) : _.noop())
         .pipe(isProduction ? $.minifyCss({ keepSpecialComments: 1, advanced: false }) : _.noop())
