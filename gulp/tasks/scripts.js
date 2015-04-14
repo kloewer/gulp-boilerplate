@@ -18,12 +18,26 @@ gulp.task('scripts', function() {
 
     var app = gulp.src(build.files.scripts.map(function (file) { return paths.scripts.src + '/' + file; }))
         .pipe($.jshint())
-        .pipe($.jshint.reporter('default', { verbose: true }))
+        .pipe($.notify(function (file) {
+
+            // don't show something if success
+            if (file.jshint.success) {
+                return false;
+            }
+
+            var errors = file.jshint.results.map(function (data) {
+                if (data.error) {
+                    return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason;
+                }
+            }).join('\n');
+
+            return {
+                title: 'Warning',
+                message: file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors
+            };
+        }))
         .pipe($.jshint.reporter('fail'))
-        .on('error', function (error) {
-            console.log(error.toString());
-            this.emit('end');
-        })
+        .on('error', function (error) { this.emit('end') })
         .pipe($.concat('app.js'))
         .pipe(isProduction ? $.uglify() : _.noop())
         .pipe(gulp.dest(paths.scripts.dest))

@@ -20,4 +20,4 @@ Check `build.json` for customizing.
 
 ---
 
-v1.1.0
+v1.2.0

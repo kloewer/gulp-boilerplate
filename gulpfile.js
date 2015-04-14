@@ -3,6 +3,6 @@
  * that folder gets automatically required by the loop in `./gulp/index.js`.
  * to add a new task, simply add a new task file to gulp/tasks.
  *
- * @version 1.1.0
+ * @version 1.2.0
  */
 require('./gulp');
