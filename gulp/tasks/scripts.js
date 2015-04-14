@@ -17,8 +17,15 @@ gulp.task('scripts', function() {
         .pipe($.size({ title: 'vendor scripts done.' }));
 
     var app = gulp.src(build.files.scripts.map(function (file) { return paths.scripts.src + '/' + file; }))
-        // .pipe($.concat('app.js'))
-        // .pipe(isProduction ? $.uglify() : _.noop())
+        .pipe($.jshint())
+        .pipe($.jshint.reporter('default', { verbose: true }))
+        .pipe($.jshint.reporter('fail'))
+        .on('error', function (error) {
+            console.log(error.toString());
+            this.emit('end');
+        })
+        .pipe($.concat('app.js'))
+        .pipe(isProduction ? $.uglify() : _.noop())
         .pipe(gulp.dest(paths.scripts.dest))
         .pipe($.size({ title: 'app scripts done.' }))
         .pipe(browserSync.reload({ stream: true }));
