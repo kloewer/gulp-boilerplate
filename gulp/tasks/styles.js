@@ -5,10 +5,9 @@ gulp.task('styles', function() {
 
     var app = gulp.src(build.files.styles.map(function (file) { return paths.styles.src + '/' + file; }))
         .pipe($.sass({
-            errLogToConsole: true,
             indentedSyntax: true,
             outputStyle: sassStyle
-        }))
+        }).on('error', $.sass.logError))
         // @see https://github.com/ai/autoprefixer
         .pipe($.autoprefixer(build.autoprefixer && build.autoprefixer.browsers ? build.autoprefixer.browsers : 'last 2 versions'));
 

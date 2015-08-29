@@ -17,7 +17,8 @@ gulp.task('scripts', function() {
         .pipe($.size({ title: 'vendor scripts done.' }));
 
     var app = gulp.src(build.files.scripts.map(function (file) { return paths.scripts.src + '/' + file; }))
-        .pipe($.jshint())
+        .pipe($.jshint({ 'esnext' : true }))
+        .pipe($.babel())
         .pipe($.notify(function (file) {
 
             // don't show something if success
