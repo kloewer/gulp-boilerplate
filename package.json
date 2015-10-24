@@ -1,11 +1,11 @@
 {
   "name": "gulp-boilerplate",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Gulp Boilerplate",
-  "license" : "CC-BY-4.0",
-  "repository" :
-  { "type" : "git"
-  , "url" : "https://github.com/mzdr/gulp-boilerplate.git"
+  "license": "CC-BY-4.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mzdr/gulp-boilerplate.git"
   },
   "dependencies": {},
   "devDependencies": {
@@ -28,6 +28,7 @@
     "gulp-notify": "^2.2.0",
     "gulp-sass": "^2.0.4",
     "gulp-size": "^2.0.0",
+    "gulp-svg-sprite": "^1.2.12",
     "gulp-uglify": "^1.4.1",
     "gulp-watch": "^4.3.5",
     "main-bower-files": "^2.9.0",

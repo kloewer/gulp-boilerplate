@@ -6,13 +6,15 @@
         "fonts": "fonts",
         "images": "images",
         "scripts": "js",
-        "styles": "css"
+        "styles": "css",
+        "svgsprites": "svgsprites"
     },
     "files": {
         "fonts": ["**/*.{woff2,woff,svg,eot,ttf,otf}"],
         "images": ["**/*.{png,jpg,jpeg,gif,svg}"],
         "scripts": ["**/*.js"],
-        "styles": ["**/*.{sass,css}"]
+        "styles": ["**/*.{sass,css}"],
+        "svgsprites": ["**/*.{svg,svgz}"]
     },
     "browserSync": {
         "proxy": "localhost",

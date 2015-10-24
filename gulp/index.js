@@ -31,6 +31,10 @@ paths = {
     fonts: {
         src: build.src + '/' + build.directories.fonts,
         dest: build.dest + '/' + build.directories.fonts
+    },
+    svgsprites: {
+        src: build.src + '/' + build.directories.svgsprites,
+        dest: build.dest + '/' + build.directories.svgsprites
     }
 };
 

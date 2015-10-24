@@ -30,4 +30,11 @@ gulp.task('watch', [ 'images', 'styles', 'scripts', 'fonts', 'browser-sync' ], f
     }), function() {
         gulp.start('fonts');
     });
+
+    // watch fonts
+    $.watch(build.files.svgsprites.map(function (file) {
+        return paths.svgsprites.src + '/' + file;
+    }), function() {
+        gulp.start('svgsprites');
+    });
 });
