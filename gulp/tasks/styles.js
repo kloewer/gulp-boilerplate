@@ -13,7 +13,7 @@ gulp.task('styles', function() {
 
     return merge(gulp.src(bower(build.files.styles)), app)
         .pipe($.concat('styles.css'))
-        .pipe(isProduction ? $.combineMediaQueries({ log: true }) : _.noop())
+        .pipe(isProduction ? $.mergeMediaQueries({ log: true }) : _.noop())
         .pipe(isProduction ? $.minifyCss({ keepSpecialComments: 1, advanced: false }) : _.noop())
         .pipe(gulp.dest(paths.styles.dest))
         .pipe($.size({ title: 'styles done.' }))
